@@ -114,7 +114,7 @@ The response body will be something like
 
 #### Get Coordinates
 
-```
+```http
 POST /api_validation/get_population
 ```
 
@@ -147,7 +147,7 @@ The response body will look something like
 ```
 
 #### Get Coordinates
-```
+```http
 POST /api_validation/get_coordinates
 ```
 
@@ -169,7 +169,7 @@ The response body will look something like
 
 #### Finding location name from twitter tweet
 
-```
+```http
 POST /api_validation/location_finder_twitter
 ```
 
