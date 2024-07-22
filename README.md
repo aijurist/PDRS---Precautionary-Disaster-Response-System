@@ -33,7 +33,10 @@ pip install -r requirements.txt
 To run the Flask Application run the command 
 ```bash
 python -u "./python/app.py" 
-```## API Reference
+```
+
+
+## API Reference
 
 #### Webscrape Twitter and get prediction results
 
