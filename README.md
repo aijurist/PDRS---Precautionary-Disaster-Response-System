@@ -1,7 +1,12 @@
 
-FORUS - FOCUSED OPERATIONAL RESCUERS UNIFIED SYSTEM
+# FORUS - FOCUSED OPERATIONAL RESCUERS UNIFIED SYSTEM
+FORUS is a comprehensive Disaster Management and Control project designed to:
 
-
+- Minimize Wait Times: Reduce delays in taking action during disaster situations.
+- Identify Potential Disaster Areas: Predict and pinpoint regions where disasters might occur.
+- Provide Detailed Reports: Generate thorough reports for each disaster event.
+- Analyze Social Media: Utilize social media tweets to identify and verify disaster occurrences.
+This system integrates real-time data analysis and verification to enhance disaster response and management efforts.
 
 
 ## Installation
@@ -28,14 +33,7 @@ pip install -r requirements.txt
 To run the Flask Application run the command 
 ```bash
 python -u "./python/app.py" 
-```
-
-
-
-
-
-
-## API Reference
+```## API Reference
 
 #### Webscrape Twitter and get prediction results
 
@@ -206,3 +204,39 @@ ngrok http 8080
 ```
 
 An API Gateway to access the Flask application endpoints has been created
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`GEMINI_API_KEY`
+
+`SERVICE_ACCOUNT_KEY`
+
+#### GEMINI_API_KEY
+
+-  Head to `https://aistudio.google.com/`
+- Choose to create a new API key and create one
+
+#### SERVICE_ACCOUNT_KEY
+
+- Go to Google and search `GCP console`
+- Head over to the console and press the menu towards the left
+- Go to IAM and Billing and search for Service accounts
+- Click on `Create new service account` and give the service account a name and a description
+- Under `Grant this service account access to project`, grant the Project -> Editor role.
+- Click Done
+- After creating the service account, click on the service account name.
+- Go to the "Keys" tab.
+- Click "Add Key" > "Create New Key".
+- Choose JSON and click "Create".
+- A JSON key file will be downloaded to your computer. Keep it secure.
+- Now navigate to the python directory in the project and paste the downloaded JSON key file there
+
+Create a .env file in the same directory and structure it in the following manner
+
+```code
+GEMINI_API_KEY= {Your GEMINI_API_KEY}
+SERVICE_ACCOUNT_KEY=python/{file_name}.json
+```
+
+
