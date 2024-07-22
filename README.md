@@ -40,7 +40,7 @@ python -u "./python/app.py"
 #### Webscrape Twitter and get prediction results
 
 ```http
-  POST /api_twitter/scrape_twitter
+POST /api_twitter/scrape_twitter
 ```
 The request body should be a JSON object with the following structure:
 | Field | Type     | Description                |
@@ -79,7 +79,7 @@ The response body will be something like
 #### Get Report
 
 ```http
-  POST /api_model/get_report
+POST /api_model/get_report
 ```
 
 The request body should be a JSON object with the following structure:
