@@ -193,3 +193,16 @@ The response body will look something like
 ```
 
 Note that the response of this endpoint might return null in some cases
+
+# Using Ngrok for hosting 
+
+- Download ngrok from the official website ```https://ngrok.com/download```
+
+- Start the Flask application by using the command given ```python -u "./python/app.py" ```
+
+- Open the ngrok.exe file and use the command:  
+```bash
+ngrok http 8080
+```
+
+An API Gateway to access the Flask application endpoints has been created
