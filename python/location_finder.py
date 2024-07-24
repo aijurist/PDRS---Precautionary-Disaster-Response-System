@@ -11,13 +11,13 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 class LocationModel(BaseModel):
     location: str = Field(description="The name of the location where the disaster has occurred")
-    coordinates: dict = Field(description="A dictionary containing the latitude and longitude of the location where the disaster has occurred")
+    is_urban: bool = Field(description="A boolean indicating whether the location is an urban location of rural location")
     
 parser = JsonOutputParser(pydantic_object=LocationModel)
 
 prompt = PromptTemplate(
-    template='''Based on the tweet: "{tweet}", identify the location and provide the latitude and longitude as "coordinates"
-    Return the output in the following JSON format: {format_instruction}''',
+    template='''Based on the tweet: "{tweet}", identify the location and provide it in the format of '{{location name}}, {{District}}, {{State}}, {{Country}}.
+    Also identify if the location is an urban or a rural area and return the boolean value. Return the output in the following JSON format: {format_instruction}''',
     input_variables=["tweet"],
     partial_variables={"format_instruction": parser.get_format_instructions()},
 )
