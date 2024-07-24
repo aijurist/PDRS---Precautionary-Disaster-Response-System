@@ -31,11 +31,10 @@ pip install -r requirements.txt
 ```
 
 To run the Flask Application run the command 
+
 ```bash
 python -u "./python/app.py" 
 ```
-
-
 ## API Reference
 
 #### Webscrape Twitter and get prediction results
@@ -241,5 +240,23 @@ Create a .env file in the same directory and structure it in the following manne
 GEMINI_API_KEY= {Your GEMINI_API_KEY}
 SERVICE_ACCOUNT_KEY=python/{file_name}.json
 ```
+
+
+
+## Demo
+
+* The following demo videos showcase the functionality of our Flask server and how we can use Postman to interact with the created APIs.
+* Watch the videos below to see the APIs in action and understand how to use them for various operations.
+* Each video provides a step-by-step guide on using different endpoints, ensuring you can quickly get up to speed with the application.
+
+### Video Demos
+
+| Scraping Twitter and Predicting Disasters | Finding location from Twitter post made | Finding Coordinates from the location extracted from the Twitter post |
+|:-----------------------------------------:|:--------------------------------------:|:--------------------------------------------------------------------:|
+| [![Scraping Twitter and Predicting Disasters](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/thumbnails/scrape_twitter.png)](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/videos/scrape_twitter.mp4) | [![Finding location from Twitter post made](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/thumbnails/location_finder_twitter.png)](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/videos/location_finder_twitter.mp4) | [![Finding Coordinates from the location extracted from the Twitter post](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/thumbnails/get_coordinates.png)](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/videos/get_coordinates.mp4) |
+
+| Finding Population from Coordinates using Google Earth Engine | Generating Report From the population and tweet and predictions made |
+|:------------------------------------------------------------:|:-------------------------------------------------------------------:|
+| [![Finding Population from Coordinates using Google Earth Engine](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/thumbnails/get_population.png)](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/videos/get_population.mp4) | [![Generating Report From the population and tweet and predictions made](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/thumbnails/get_report.png)](https://raw.githubusercontent.com/aijurist/HACKFEST_24/main/videos/get_report.mp4) |
 
 
