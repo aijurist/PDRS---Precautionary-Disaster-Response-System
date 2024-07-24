@@ -51,7 +51,7 @@ def login_and_scrape_tweets(username, password, tweet_count=20):
     tweet_data = []
     last_height = driver.execute_script("return document.body.scrollHeight")
 
-    while len(tweet_data) < tweet_count:
+    while len(tweet_data) < tweet_count - 5:
         tweets = driver.find_elements(By.CSS_SELECTOR, "[data-testid='tweet']")
         for tweet in tweets:
             tweet_text = tweet.text
@@ -71,17 +71,10 @@ def login_and_scrape_tweets(username, password, tweet_count=20):
         last_height = new_height
 
     driver.quit()
-
-    # Manually check and remove any extra tweets
-    if len(tweet_data) > tweet_count:
-        tweet_data = tweet_data[:tweet_count]
-
     return tweet_data
 
 def predict_tweets(tweets):
-    endpoint_url = 'http://localhost:8080/api_model/predict'
-    location_finder_url = 'http://localhost:8080/api_validation/location_finder_twitter'
-    get_population_url = 'http://localhost:8080/api_validation/get_population'
+    endpoint_url = 'http://localhost:8080/api_model/predict' 
 
     data = {'twitter_data': [tweet['text'] for tweet in tweets]}
 
@@ -90,47 +83,16 @@ def predict_tweets(tweets):
         if response.status_code == 200:
             predictions = response.json()
             final_response = {}
-
             for i, tweet in enumerate(tweets):
-                result = predictions.get(str(i + 1))
+                result = predictions.get(str(i + 1)) 
                 final_response[i + 1] = {
                     'text': tweet['text'],
                     'prediction': make_serializable(result['prediction']),
                     'confidence': make_serializable(result['confidence']),
                     'hashtags': tweet['hashtags'],
-                    'mentions': tweet['mentions']
+                    'mentions': tweet['mentions'],
                 }
-
-                if result['prediction'] == 1:
-                    # Make POST request to /api_validation/location_finder_twitter
-                    location_response = requests.post(location_finder_url, json={'tweet': tweet['text']})
-                    location_status = location_response.json()['status'] 
-                    if location_status == 'error':
-                        continue
-                    if location_response.status_code == 200:
-                        location_data = location_response.json()
-                        print(location_data)
-                        locations = location_data['locations']
-                        location_name = locations['location']
-                        is_urban = locations['is_urban']
-
-                        final_response[i + 1]['location_data'] = locations
-
-                        # Make POST request to /api_validation/get_population
-                        population_data = {
-                            'location_name': location_name,
-                            'radius': 5,  # Assuming a default radius, adjust as needed
-                            'is_urban': is_urban
-                        }
-                        population_response = requests.post(get_population_url, json=population_data)
-                        if population_response.status_code == 200:
-                            population_info = population_response.json()
-                            final_response[i + 1]['population'] = population_info
-                        else:
-                            final_response[i + 1]['population'] = 'Failed to get population data'
-                    else:
-                        final_response[i + 1]['location_data'] = 'Failed to get location data'
-            print(final_response)
+            
             return final_response
         else:
             print(f"Error {response.status_code}: {response.text}")
@@ -139,6 +101,7 @@ def predict_tweets(tweets):
     except requests.exceptions.RequestException as e:
         print(f"Request error: {e}")
         return None
+    
 
 @twitter_blueprint.route('/scrape_twitter', methods=['POST'])   
 def run_prediction_script():
@@ -157,3 +120,4 @@ def run_prediction_script():
             return jsonify(error="Failed to get predictions from ML model"), 500
     else:
         return jsonify(error="No tweets scraped"), 400
+    
